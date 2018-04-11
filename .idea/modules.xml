@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HelloKotlin.iml" filepath="$PROJECT_DIR$/HelloKotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cameramodule/cameramodule.iml" filepath="$PROJECT_DIR$/cameramodule/cameramodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/numberclock/numberclock.iml" filepath="$PROJECT_DIR$/numberclock/numberclock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/timemonitor/timemonitor.iml" filepath="$PROJECT_DIR$/timemonitor/timemonitor.iml" />
+    </modules>
+  </component>
+</project>
