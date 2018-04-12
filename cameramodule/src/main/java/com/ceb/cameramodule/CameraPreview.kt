@@ -28,6 +28,7 @@ class CameraPreview(context: Context?) : SurfaceView(context), SurfaceHolder.Cal
         try {
             mCamera?.setPreviewDisplay(holder)
             mCamera?.startPreview()
+            startFaceDetection()
         } catch (e: Exception) {
             print("IOException")
         }
@@ -40,14 +41,24 @@ class CameraPreview(context: Context?) : SurfaceView(context), SurfaceHolder.Cal
             setDisplayOrientation(this!!.mCamera!!, 90)
             mCamera?.setPreviewDisplay(mHolder)
             mCamera?.startPreview()
+            startFaceDetection()
         } catch (e: Exception) {
             print("IOException ${e.message}")
-            Log.e("=========", " ${e.message}")
+            Log.e("=========", " ${e.message}${e.cause}")
         }
     }
 
     fun setDisplayOrientation(camera: Camera, angle: Int) {
         var downPolymorphic: Method = camera.javaClass.getMethod("setDisplayOrientation", Int::class.java)
         downPolymorphic.invoke(camera, angle)
+    }
+
+    fun startFaceDetection() {
+        var params: Camera.Parameters = mCamera!!.parameters
+        if (params.maxNumDetectedFaces > 0) {
+            mCamera!!.startFaceDetection()
+        } else {
+            Log.d("startfacedetection", "camera not supports face detection")
+        }
     }
 }

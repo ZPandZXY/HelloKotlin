@@ -67,6 +67,13 @@ class MainActivity : AppCompatActivity() {
             params.focusMode = Camera.Parameters.FOCUS_MODE_AUTO
             mCamera!!.parameters = params
 
+            mCamera!!.setFaceDetectionListener { faces, camera ->
+                if (!faces!!.isNotEmpty() && faces.size > 0) {
+                    Log.d("FaceDetection", "face detected: " + faces.size + " Face 1 Location X: " +
+                            faces!![0].rect.centerX() + "Y: " + faces!![0].rect.centerY())
+                }
+            }
+
             var cameraPreview = CameraPreview(this, this!!.mCamera!!)
             camera_preview.addView(cameraPreview)
             mCameraPreview = cameraPreview
@@ -104,11 +111,11 @@ class MainActivity : AppCompatActivity() {
             fos = FileOutputStream(pictureFile)
             fos.write(data)
             fos.close()
+            Log.e("---------", "拍摄成功！")
         } catch (e: Exception) {
             print("${e.message}")
             Log.e("---------", "拍摄失败！")
         } finally {
-            Log.e("---------", "拍摄成功！")
             fos!!.close()
         }
     }
@@ -191,6 +198,5 @@ class MainActivity : AppCompatActivity() {
         mMediaRecorder!!.release()
         mMediaRecorder = null
         mCamera!!.lock()
-//        mCamera = null
     }
 }
