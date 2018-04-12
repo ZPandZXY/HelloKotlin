@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
                 print("没有相机可以被打开")
             }
 
-           /* var params: Camera.Parameters = mCamera!!.parameters
+            var params: Camera.Parameters = mCamera!!.parameters
             params.focusMode = Camera.Parameters.FOCUS_MODE_AUTO
-            mCamera!!.parameters=params*/
+            mCamera!!.parameters = params
 
             var cameraPreview = CameraPreview(this, this!!.mCamera!!)
             camera_preview.addView(cameraPreview)
@@ -76,13 +76,13 @@ class MainActivity : AppCompatActivity() {
             }
             take_capture.setOnClickListener {
                 if (isRecording) {
-                    mMediaRecorder.stop()
+                    mMediaRecorder!!.stop()
                     releaseMediaRecorder()
                     take_capture.text = "录像"
                     isRecording = false
                 } else {
                     if (prepareVideoRecorder()) {
-                        mMediaRecorder.start()
+                        mMediaRecorder!!.start()
                         take_capture.text = "停止"
                         isRecording = true
                     } else {
@@ -113,24 +113,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    var mMediaRecorder: MediaRecorder = MediaRecorder()
+    var mMediaRecorder: MediaRecorder? = null
 
     fun prepareVideoRecorder(): Boolean {
         mCamera!!.unlock()
 
-        mMediaRecorder.setCamera(mCamera)
+        mMediaRecorder = MediaRecorder()
+        mMediaRecorder!!.setCamera(mCamera)
 
-        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER)
-        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA)
+        mMediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.CAMCORDER)
+        mMediaRecorder!!.setVideoSource(MediaRecorder.VideoSource.CAMERA)
 
-        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P))
+        mMediaRecorder!!.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P))
 
-        mMediaRecorder.setOutputFile(FileUtil.getOutputMediaFile(MEDIA_TYPE_VIDEO).toString())
+        mMediaRecorder!!.setOutputFile(FileUtil.getOutputMediaFile(MEDIA_TYPE_VIDEO).toString())
 
-        mMediaRecorder.setPreviewDisplay(mCameraPreview.mHolder.surface)
-
+        mMediaRecorder!!.setPreviewDisplay(mCameraPreview.mHolder.surface)
         try {
-            mMediaRecorder.prepare()
+            mMediaRecorder!!.prepare()
         } catch (e: Exception) {
             releaseMediaRecorder()
             return false
@@ -187,8 +187,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun releaseMediaRecorder() {
-        mMediaRecorder.reset()
-        mMediaRecorder.release()
+        mMediaRecorder!!.reset()
+        mMediaRecorder!!.release()
+        mMediaRecorder = null
         mCamera!!.lock()
+//        mCamera = null
     }
 }
