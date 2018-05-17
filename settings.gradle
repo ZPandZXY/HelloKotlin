@@ -1,1 +1,1 @@
-include ':app', ':timemonitor', ':numberclock', ':cameramodule'
+include ':app', ':timemonitor', ':numberclock', ':cameramodule', ':annotationmodule', ':reflectionmodule'

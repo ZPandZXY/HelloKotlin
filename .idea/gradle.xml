@@ -8,9 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/annotationmodule" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/cameramodule" />
             <option value="$PROJECT_DIR$/numberclock" />
+            <option value="$PROJECT_DIR$/reflectionmodule" />
             <option value="$PROJECT_DIR$/timemonitor" />
           </set>
         </option>
